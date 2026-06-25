@@ -1,0 +1,24 @@
+name: Compiler Abysse (3dsx)
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm:latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Compiler avec make
+        run: make
+
+      - name: Uploader le fichier .3dsx genere
+        uses: actions/upload-artifact@v4
+        with:
+          name: abysse-3dsx
+          path: "*.3dsx"
