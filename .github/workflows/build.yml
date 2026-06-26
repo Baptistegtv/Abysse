@@ -14,8 +14,17 @@ jobs:
       - name: Recuperer le code
         uses: actions/checkout@v4
 
-      - name: Compiler avec make
-        run: make
+      - name: Diagnostic environnement
+        run: |
+          echo "=== devkitARM bin (gcc/ld) ==="
+          ls $DEVKITARM/bin | grep -iE "gcc|^ld"
+          echo "=== Extrait 3ds_rules (regle de link) ==="
+          grep -n -A3 '$(OUTPUT).elf' $DEVKITARM/3ds_rules || true
+          grep -n '^LD\|^CC' $DEVKITARM/3ds_rules || true
+
+      - name: Compiler avec make (verbose)
+        run: |
+          make V=1
 
       - name: Uploader le fichier .3dsx genere
         uses: actions/upload-artifact@v4
