@@ -1,4 +1,4 @@
-#---------------------------------------------------------------------------------
+I#---------------------------------------------------------------------------------
 .PHONY: all clean
 
 ifeq ($(strip $(DEVKITARM)),)
@@ -88,6 +88,8 @@ all	:	$(OUTPUT).3dsx
 
 $(OUTPUT).3dsx	:	$(OUTPUT).elf $(OUTPUT).smdh
 $(OUTPUT).elf	:	$(OFILES)
+	@echo linking $(notdir $@)
+	$(CC) $(LDFLAGS) $(OFILES) $(LIBPATHS) $(LIBS) -o $@
 
 $(OUTPUT).smdh: 
 	smdhtool --create "$(APP_TITLE)" "$(APP_DESCRIPTION)" "$(APP_AUTHOR)" $(DEVKITPRO)/libctru/default_icon.png $@
