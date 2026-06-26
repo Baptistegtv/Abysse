@@ -340,7 +340,7 @@ static void dessinerPoisson(float sx, float sy, float taille, float r, float g, 
     C2D_DrawEllipseSolid(sx - taille*0.3f, sy - taille*0.05f + balance, 0.0f, taille*0.6f, taille*0.35f, couleurVentre);
 
     // queue (triangle)
-    float qx = regarde_droite ? (sx - taille*0.95f) : (sx + taille*0.95f - taille*0.5f);
+    
     float dir = regarde_droite ? -1.0f : 1.0f;
     C2D_DrawTriangle(
         sx + dir * taille*0.45f, sy - taille*0.35f + balance, couleurNageoire,
